@@ -1,0 +1,16 @@
+# Site settings
+title: Nixholas' Blog
+email: nixholas@outlook.com
+description: > # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+baseurl: "/blog/" # the subpath of your site, e.g. /blog/
+production_url : http://nixxholas.github.io.com/blog
+BASE_PATH : http://code.nixholas.com/blog
+url: "http://code.nixholas.com" # the base hostname & protocol for your site
+twitter_username: n1xxh0las
+github_username:  nixxholas
+
+# Build settings
+markdown: kramdown

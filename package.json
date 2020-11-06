@@ -1,0 +1,31 @@
+{
+  "name": "nicholas-chen",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nicholas' Blog",
+  "author": "nixholas@icloud.com",
+  "scripts": {
+    "build": "nuxt build",
+    "lint": "vue-cli-service lint",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
+    "dev": "nuxt",
+    "generate": "nuxt generate",
+    "precommit": "npm run lint",
+    "start": "nuxt start"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0",
+    "push-dir": "^0.4.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "^4.5.8",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^6.7.2",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^7.0.0-beta.4"
+  }
+}

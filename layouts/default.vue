@@ -1,12 +1,22 @@
 <template>
   <div>
+    <NavBar />
     <nuxt />
   </div>
 </template>
 
+<script>
+import NavBar from '~/components/navbar.vue'
+
+export default {
+  components: {
+    NavBar
+  }
+}
+</script>
+
 <style>
 html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

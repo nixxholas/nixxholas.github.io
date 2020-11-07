@@ -54,16 +54,11 @@
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex-shrink-0">
-            <img
-              class="block lg:hidden h-8 w-auto"
-              src="https://tailwindui.com/img/logos/v1/workflow-mark-on-dark.svg"
-              alt="Workflow logo"
+            <h2 
+              class="h-8"
             >
-            <img
-              class="hidden lg:block h-8 w-auto"
-              src="https://tailwindui.com/img/logos/v1/workflow-logo-on-dark.svg"
-              alt="Workflow logo"
-            >
+              Nicholas Chen
+            </h2>
           </div>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex">

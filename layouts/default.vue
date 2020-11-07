@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar />
-    <nuxt class="px-0 pt-0 mx-auto overflow-hidden xl:container sm:px-4 xl:px-0 sm:pt-6 sm:overflow-auto" />
+    <nuxt class="px-0 pt-0 mx-auto xl:container sm:px-4 xl:px-0 sm:pt-6" />
   </div>
 </template>
 

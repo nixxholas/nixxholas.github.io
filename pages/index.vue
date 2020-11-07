@@ -120,12 +120,22 @@
         Certifications & Achievements
         <span class="inline-block text-xs text-gray-600 font-normal">If you really need to check it out</span>
       </h2>
-      <div class="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-4 py-4">
+      <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 py-4">
         <div class="max-w-sm rounded overflow-hidden shadow-lg">
           <div class="px-6 py-4">
-            <div class="font-bold text-md mb-2">SiTF 2017 Best Innovative ICM Student Project (Tertiary)</div>
-            <p class="text-gray-700 text-base">
-              Vaultix, a personal assistant capable of storing, retrieving and organising any form of data was a project.
+            <div class="font-bold text-md">SiTF 2017 Best Innovative ICM Student Project (Tertiary)</div>
+            <div class="font-semibold text-sm mb-2 text-gray-500">26 October 2017</div>
+            <p class="text-gray-700 text-xs">
+              Following on the success of Imagine Cup 2017, Vaultix clinched the SiTF award for the year in terms of student innovation.
+            </p>
+          </div>
+        </div>
+        <div class="max-w-sm rounded overflow-hidden shadow-lg">
+          <div class="px-6 py-4">
+            <div class="font-bold text-md">Imagine Cup 2017 Singapore Runner Up</div>
+            <div class="font-semibold text-sm mb-2 text-gray-500">2017</div>
+            <p class="text-gray-700 text-xs">
+              Vaultix, a personal assistant capable of storing, retrieving and organising any form of data without context was a project (Such as bank statements or even bills) that started during the end of my Diploma course in Singapore Polytechnic.
             </p>
           </div>
         </div>

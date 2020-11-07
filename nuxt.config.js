@@ -13,7 +13,7 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
   },
-  router: { base: '/' },
+  router: { base: '/nicholas-chen' },
   /*
   ** Customize the progress bar color
   */

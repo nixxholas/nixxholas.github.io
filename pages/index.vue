@@ -1,43 +1,20 @@
 <template>
-  <section class="container">
-    <!-- <div>
-      <app-logo />
-      <h1 class="title">
-        nicholas-chen
-      </h1>
-      <h2 class="subtitle">
-        Nicholas' Blog
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub</a>
-      </div>
-    </div> -->
-    <header class="bg-white shadow">
+  <div>
+    <header class="bg-white">
       <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold leading-tight text-gray-900">Dashboard</h1>
+        <h1 class="text-3xl font-bold leading-tight text-gray-900">
+          Knowledge is wealth.
+        </h1>
       </div>
     </header>
-    <main>
+    <!-- <main>
       <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <!-- Replace with your content -->
         <div class="px-4 py-6 sm:px-0">
           <div class="border-4 border-dashed border-gray-200 rounded-lg h-96" />
         </div>
-        <!-- /End replace -->
       </div>
-    </main>
-  </section>
+    </main> -->
+  </div>
 </template>
 
 <script>

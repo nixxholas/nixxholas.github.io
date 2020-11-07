@@ -13,7 +13,7 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
   },
-  router: { base: '/nicholas-chen/' },
+  router: { base: '/' },
   /*
   ** Customize the progress bar color
   */
@@ -36,5 +36,8 @@ module.exports = {
       }
     },
   },
-  buildModules: ['@nuxtjs/tailwindcss']
+  buildModules: ['@nuxtjs/tailwindcss'],
+  modules: [
+    '@nuxt/content'
+  ]
 };

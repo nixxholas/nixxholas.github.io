@@ -18,7 +18,7 @@
         </p>
       </div>
     </header>
-    <hr>
+    <hr class="py-2">
     <!-- <UsefulData /> -->
     <!-- <main>
       <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -27,7 +27,7 @@
         </div>
       </div>
     </main> -->
-    <div class="px-8 py-2">
+    <div class="px-8 pb-4">
       <h2 class="text-xl font-bold leading-tight text-gray-900 py-4">
         Projects involved
       </h2>
@@ -109,6 +109,23 @@
             </a>
             <p class="mt-2 text-xs text-gray-600">
               An extended version of the original Minecraft Server software that enables users to create Minecraft servers that enable extensive features and controls.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="py-2">
+    <div class="px-8 pb-4">
+      <h2 class="text-xl font-bold leading-tight text-gray-900 py-4">
+        Certifications & Achievements
+        <span class="inline-block text-xs text-gray-600 font-normal">If you really need to check it out</span>
+      </h2>
+      <div class="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-4 py-4">
+        <div class="max-w-sm rounded overflow-hidden shadow-lg">
+          <div class="px-6 py-4">
+            <div class="font-bold text-md mb-2">SiTF 2017 Best Innovative ICM Student Project (Tertiary)</div>
+            <p class="text-gray-700 text-base">
+              Vaultix, a personal assistant capable of storing, retrieving and organising any form of data was a project.
             </p>
           </div>
         </div>

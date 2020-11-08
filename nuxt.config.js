@@ -39,5 +39,6 @@ module.exports = {
   buildModules: ['@nuxtjs/tailwindcss'],
   modules: [
     '@nuxt/content'
-  ]
+  ],
+  target: 'static'
 };

@@ -6,7 +6,7 @@
           Hello, I'm Nicholas Chen!
         </h1>
         <p class="text-sm py-2">
-          I'm an undergraduate student, software developer focusing on big data and fintech and enjoy creating things that make an impact to the world, small or big, be it a website, mobile app or anything in between. My goal is to build products that make everyone's daily life better.<br>
+          I'm an undergraduate student and software developer focused in big data and fintech, and enjoy creating things that make an impact to the world, small or big, be it a website, mobile app or anything in between. My goal is to build products that make everyone's daily life better.<br>
           <br>
           I graduated from 
           <a
@@ -108,7 +108,7 @@
               XDA
             </a>
             <p class="mt-2 text-xs text-gray-600">
-              An extended version of the original Minecraft Server software that enables users to create Minecraft servers that enable extensive features and controls.
+              Worked mainly on the Samsung Galaxy Nexus, providing the community an alternative version of an Android Kernel that provided a more optimised kernel.
             </p>
           </div>
         </div>
@@ -121,6 +121,62 @@
         <span class="inline-block text-xs text-gray-600 font-normal">If you really need to check it out</span>
       </h2>
       <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 py-4">
+        <a 
+          href="#" 
+          class="transition duration-500 ease-in-out max-w-sm rounded overflow-hidden hover:shadow-2xl transform hover:-translate-y-1"
+        >
+          <div class="px-6 py-4">
+            <div class="font-bold text-md">
+              Google Cloud Certified Professional Cloud Architect
+            </div>
+            <div class="font-semibold text-sm mb-2 text-gray-500">2020</div>
+            <p class="text-gray-700 text-xs">
+              A Professional Cloud Architect enables organizations to leverage Google Cloud technologies, through scalable and sustainable means on the Google Cloud Platform. 
+            </p>
+          </div>
+        </a>
+        <a 
+          href="https://www.youracclaim.com/badges/cb5d165e-d597-42eb-b8f7-095d222b0234/linked_in_profile" 
+          class="transition duration-500 ease-in-out max-w-sm rounded overflow-hidden hover:shadow-2xl transform hover:-translate-y-1"
+        >
+          <div class="px-6 py-4">
+            <div class="font-bold text-md">
+              MCSD: App Builder
+            </div>
+            <div class="font-semibold text-sm mb-2 text-gray-500">2018</div>
+            <p class="text-gray-700 text-xs">
+              This certification validates that you have the skills needed to build modern mobile and/or web applications and services.
+            </p>
+          </div>
+        </a>
+        <a 
+          href="https://www.youracclaim.com/badges/0c52536a-f674-4515-a2d2-48100218cae8/linked_in_profile" 
+          class="transition duration-500 ease-in-out max-w-sm rounded overflow-hidden hover:shadow-2xl transform hover:-translate-y-1"
+        >
+          <div class="px-6 py-4">
+            <div class="font-bold text-md">
+              MCSA: Web Applications
+            </div>
+            <div class="font-semibold text-sm mb-2 text-gray-500">2018</div>
+            <p class="text-gray-700 text-xs">
+              Demonstrate your expertise at implementing modern web apps.
+            </p>
+          </div>
+        </a>
+        <a 
+          href="https://www.youracclaim.com/badges/e4e0aba0-c786-45c6-9541-2b24dc376a60/linked_in_profile" 
+          class="transition duration-500 ease-in-out max-w-sm rounded overflow-hidden hover:shadow-2xl transform hover:-translate-y-1"
+        >
+          <div class="px-6 py-4">
+            <div class="font-bold text-md">
+              MTA: Introduction to Programming Using Java
+            </div>
+            <div class="font-semibold text-sm mb-2 text-gray-500">2018</div>
+            <p class="text-gray-700 text-xs">
+              Candidates for this exam are application developers working with Java 6 SE or later, secondary and immediate post-secondary level students of software development, or entry-level software developers.
+            </p>
+          </div>
+        </a>
         <div class="max-w-sm rounded overflow-hidden shadow-lg">
           <div class="px-6 py-4">
             <div class="font-bold text-md">SiTF 2017 Best Innovative ICM Student Project (Tertiary)</div>
@@ -183,5 +239,9 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+.float-animate {
+  transition: all .3s cubic-bezier(.25,.8,.25,1);
 }
 </style>

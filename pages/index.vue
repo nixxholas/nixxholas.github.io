@@ -29,9 +29,30 @@
     </main> -->
     <div class="px-8 pb-4">
       <h2 class="text-xl font-bold leading-tight text-gray-900 py-4">
-        Projects involved
+        Teams involved
       </h2>
       <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 py-4">
+        <div class="md:flex">
+          <div class="md:flex-shrink-0">
+            <img 
+              class="rounded-sm md:w-20"
+              src="~/assets/solana-fm.png" 
+              alt="Solana FM"
+            >
+          </div>
+          <div class="mt-4 md:mt-0 md:ml-6">
+            <a
+              href="https://solana.fm"
+              class="uppercase text-indigo-600 tracking-wide block mt-1 text-sm leading-tight font-semibold hover:underline"
+            >
+              Solana FM
+            </a>
+            <div class="font-semibold text-sm mb-2 text-gray-500">Core/Rust Engineer</div>
+            <p class="mt-2 text-xs text-gray-600">
+              The first GraphQL-based explorer for the Solana blockchain.
+            </p>
+          </div>
+        </div>
         <div class="md:flex">
           <div class="md:flex-shrink-0">
             <img 
@@ -47,6 +68,7 @@
             >
               Nozomi
             </a>
+            <div class="font-semibold text-sm mb-2 text-gray-500">Core Engineer</div>
             <p class="mt-2 text-xs text-gray-600">
               A simple and easy web application that enables you to gather, process and utilise datasets.
             </p>
@@ -67,6 +89,7 @@
             >
               Coinhako
             </a>
+            <div class="font-semibold text-sm mb-2 text-gray-500">Software Architect</div>
             <p class="mt-2 text-xs text-gray-600">
               Southeast Asia's gateway to cryptocurrency.
             </p>
@@ -87,6 +110,7 @@
             >
               Bukkit
             </a>
+            <div class="font-semibold text-sm mb-2 text-gray-500">Contributor</div>
             <p class="mt-2 text-xs text-gray-600">
               An extended version of the original Minecraft Server software that enables users to create Minecraft servers that enable extensive features and controls.
             </p>
@@ -107,6 +131,7 @@
             >
               XDA
             </a>
+            <div class="font-semibold text-sm mb-2 text-gray-500">Linux Kernel Engineer</div>
             <p class="mt-2 text-xs text-gray-600">
               Worked mainly on the Samsung Galaxy Nexus, providing the community an alternative version of an Android Kernel that provided a more optimised kernel.
             </p>
@@ -121,6 +146,20 @@
         <span class="inline-block text-xs text-gray-600 font-normal">If you really need to check it out</span>
       </h2>
       <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 py-4">
+        <a 
+          href="https://solana.com/news/announcing-winners-of-the-solana-season-hackathon" 
+          class="transition duration-500 ease-in-out max-w-sm rounded overflow-hidden hover:shadow-2xl transform hover:-translate-y-1"
+        >
+          <div class="px-6 py-4">
+            <div class="font-bold text-md">
+              Solana Season Hackathon, Our Network Prize
+            </div>
+            <div class="font-semibold text-sm mb-2 text-gray-500">2021</div>
+            <p class="text-gray-700 text-xs">
+              Solana FM, the first full indexing engine built for the Solana Blockchain.
+            </p>
+          </div>
+        </a>
         <a 
           href="#" 
           class="transition duration-500 ease-in-out max-w-sm rounded overflow-hidden hover:shadow-2xl transform hover:-translate-y-1"

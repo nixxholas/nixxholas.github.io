@@ -1,23 +1,47 @@
-# nicholas-chen
+<div align="center">
+<img alt="Portfolio" src="https://github.com/nicholaschen/portfolio/assets/16860528/57ffca81-3f0a-4425-b31d-094f61725455" width="90%">
+</div>
 
-> Nicholas' Blog
+# Portfolio [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnicholaschen%2Fportfolio)
 
-## Build Setup
+Built with next.js, [shadcn/ui](https://ui.shadcn.com/), and [magic ui](https://magicui.design/), deployed on Vercel.
 
-``` bash
-# install dependencies
-$ npm install # Or yarn install
+# Features
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+- Setup only takes a few minutes by editing the [single config file](./src/data/resume.tsx)
+- Built using Next.js 14, React, Typescript, Shadcn/UI, TailwindCSS, Framer Motion, Magic UI
+- Includes a blog
+- Responsive for different devices
+- Optimized for Next.js and Vercel
 
-# build for production and launch server
-$ npm run build
-$ npm start
+# Getting Started Locally
 
-# generate static project
-$ npm run generate
-```
+1. Clone this repository to your local machine:
 
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
+   ```bash
+   git clone https://github.com/nicholaschen/portfolio
+   ```
 
+2. Move to the cloned directory
+
+   ```bash
+   cd portfolio
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   pnpm install
+   ```
+
+4. Start the local Server:
+
+   ```bash
+   pnpm dev
+   ```
+
+5. Open the [Config file](./src/data/resume.tsx) and make changes
+
+# License
+
+Licensed under the [MIT license](https://github.com/nicholaschen/portfolio/blob/main/LICENSE.md).

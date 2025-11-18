@@ -37,7 +37,7 @@ export const DATA = {
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
-    { href: "/investments", icon: TrendingUp, label: "Investments" },
+    { href: "/#investments", icon: TrendingUp, label: "Investments" },
   ],
   contact: {
     email: "m@nixholas.me",
@@ -152,6 +152,17 @@ export const DATA = {
       logoUrl: "/singapore-polytechnic-logo.svg",
       start: "2015",
       end: "2018",
+    },
+  ],
+  investments: [
+    {
+      company: "Example Startup",
+      investedAt: "2024-01-15",
+      description: "An innovative AI-powered platform transforming the way businesses handle customer support",
+      website: "https://example.com",
+      category: "Technology",
+      status: "Active" as const,
+      stage: "Seed",
     },
   ],
   projects: [

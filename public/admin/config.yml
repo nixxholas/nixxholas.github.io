@@ -1,0 +1,47 @@
+backend:
+  name: github
+  repo: nixxholas/nixxholas.github.io
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+# Uncomment below for local development
+# local_backend: true
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  # Blog Posts Collection
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content"
+    create: true
+    slug: "{{slug}}"
+    extension: "mdx"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "publishedAt", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # Angel Investments Collection
+  - name: "investments"
+    label: "Angel Investments"
+    folder: "content/investments"
+    create: true
+    slug: "{{slug}}"
+    extension: "mdx"
+    format: "frontmatter"
+    fields:
+      - { label: "Company Name", name: "company", widget: "string" }
+      - { label: "Investment Date", name: "investedAt", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Website", name: "website", widget: "string", required: false }
+      - { label: "Logo", name: "logo", widget: "image", required: false }
+      - { label: "Category", name: "category", widget: "select", options: ["Technology", "Finance", "Healthcare", "Consumer", "Enterprise", "Other"] }
+      - { label: "Status", name: "status", widget: "select", options: ["Active", "Exited", "Acquired", "IPO"], default: "Active" }
+      - { label: "Investment Stage", name: "stage", widget: "select", options: ["Pre-seed", "Seed", "Series A", "Series B+"], required: false }
+      - { label: "Body", name: "body", widget: "markdown" }

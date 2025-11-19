@@ -1,68 +1,46 @@
-import fs from "fs";
-import matter from "gray-matter";
-import path from "path";
-import rehypePrettyCode from "rehype-pretty-code";
-import rehypeStringify from "rehype-stringify";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
+// src/data/blog.ts
+import { client } from "@/lib/sanity/client";
+import { groq } from "next-sanity";
+import type { SanityPost } from "@/types/sanity";
 
-type Metadata = {
-  title: string;
-  publishedAt: string;
-  summary: string;
-  image?: string;
-};
-
-function getMDXFiles(dir: string) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
-}
-
-export async function markdownToHTML(markdown: string) {
-  const p = await unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypePrettyCode, {
-      // https://rehype-pretty.pages.dev/#usage
-      theme: {
-        light: "min-light",
-        dark: "min-dark",
-      },
-      keepBackground: false,
-    })
-    .use(rehypeStringify)
-    .process(markdown);
-
-  return p.toString();
-}
-
-export async function getPost(slug: string) {
-  const filePath = path.join("content", `${slug}.mdx`);
-  let source = fs.readFileSync(filePath, "utf-8");
-  const { content: rawContent, data: metadata } = matter(source);
-  const content = await markdownToHTML(rawContent);
-  return {
-    source: content,
-    metadata,
-    slug,
-  };
-}
-
-async function getAllPosts(dir: string) {
-  let mdxFiles = getMDXFiles(dir);
-  return Promise.all(
-    mdxFiles.map(async (file) => {
-      let slug = path.basename(file, path.extname(file));
-      let { metadata, source } = await getPost(slug);
-      return {
-        metadata,
-        slug,
-        source,
-      };
-    })
+// Lightweight query for blog list - only fetch what we display
+export async function getAllPosts(): Promise<
+  Pick<SanityPost, "_id" | "title" | "slug" | "publishedAt" | "mainImage" | "excerpt">[]
+> {
+  return client.fetch(
+    groq`*[_type == "post"] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      excerpt,
+      publishedAt,
+      "mainImage": mainImage.asset->url,
+    }`,
+    {},
+    {
+      // Enable caching for better performance
+      cache: "force-cache",
+      next: { tags: ["posts"] },
+    }
   );
 }
 
-export async function getBlogPosts() {
-  return getAllPosts(path.join(process.cwd(), "content"));
+// Full query for individual post page
+export async function getPost(slug: string): Promise<SanityPost | null> {
+  return client.fetch(
+    groq`*[_type == "post" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      publishedAt,
+      "mainImage": mainImage.asset->url,
+      body,
+    }`,
+    { slug },
+    {
+      // Enable caching for better performance
+      cache: "force-cache",
+      next: { tags: [`post:${slug}`] },
+    }
+  );
 }

@@ -3,6 +3,12 @@ const nextConfig = {
   output: 'export',  // Enable static exports
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
+    ],
   },
 }
 

@@ -2,6 +2,7 @@ import { getAllPosts, getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { portableTextComponents } from "@/components/portable-text";
 
@@ -67,6 +68,26 @@ export default async function Blog({
 
   return (
     <section id="blog">
+      <Link
+        href="/blog"
+        className="text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50 transition-all mb-8 flex items-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="mr-1"
+        >
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+        Back to blog
+      </Link>
       <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
         {post.title}
       </h1>

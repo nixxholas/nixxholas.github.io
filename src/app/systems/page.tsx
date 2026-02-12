@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { rankTopLosses, summarizePositions } from "@/lib/systems-data.mjs";
 
 type PolymarketPosition = {
   title: string;
@@ -23,12 +24,26 @@ type TruthMonitorSnapshot = {
   highlights?: string[];
 };
 
+type TruthSignal = {
+  id: string;
+  ts: string;
+  source: string;
+  headline: string;
+  sentiment?: string;
+  impact?: number;
+  confidence?: number;
+  url?: string;
+};
+
 const POLYMARKET_WALLET = "0xcF0f71A0e571905D4A6a8915EE26286a5e783cfb";
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 export default function SystemsPage() {
   const [positions, setPositions] = useState<PolymarketPosition[]>([]);
   const [positionsError, setPositionsError] = useState<string | null>(null);
   const [truthSnapshot, setTruthSnapshot] = useState<TruthMonitorSnapshot | null>(null);
+  const [truthSignals, setTruthSignals] = useState<TruthSignal[]>([]);
 
   useEffect(() => {
     const load = async () => {
@@ -45,6 +60,24 @@ export default function SystemsPage() {
       }
 
       try {
+        if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+          const feedRes = await fetch(
+            `${SUPABASE_URL}/rest/v1/truth_signals?select=id,ts,source,headline,sentiment,impact,confidence,url&order=ts.desc&limit=8`,
+            {
+              cache: "no-store",
+              headers: {
+                apikey: SUPABASE_ANON_KEY,
+                Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+              },
+            }
+          );
+
+          if (feedRes.ok) {
+            const rows = (await feedRes.json()) as TruthSignal[];
+            setTruthSignals(rows);
+          }
+        }
+
         const snapshotRes = await fetch("/data/truth-monitor-snapshot.json", {
           cache: "no-store",
         });
@@ -60,20 +93,9 @@ export default function SystemsPage() {
     load();
   }, []);
 
-  const stats = useMemo(() => {
-    const totalInitial = positions.reduce((acc, p) => acc + Number(p.initialValue || 0), 0);
-    const totalCurrent = positions.reduce((acc, p) => acc + Number(p.currentValue || 0), 0);
-    const totalPnl = positions.reduce((acc, p) => acc + Number(p.cashPnl || 0), 0);
-    const red = positions.filter((p) => Number(p.cashPnl || 0) < 0).length;
-    const green = positions.filter((p) => Number(p.cashPnl || 0) > 0).length;
+  const stats = useMemo(() => summarizePositions(positions), [positions]);
 
-    return { totalInitial, totalCurrent, totalPnl, red, green };
-  }, [positions]);
-
-  const topLosses = useMemo(
-    () => [...positions].sort((a, b) => Number(a.cashPnl) - Number(b.cashPnl)).slice(0, 5),
-    [positions]
-  );
+  const topLosses = useMemo(() => rankTopLosses(positions, 5), [positions]);
 
   return (
     <main className="container mx-auto max-w-4xl py-12 px-6 md:px-0 space-y-8">
@@ -108,6 +130,20 @@ export default function SystemsPage() {
                 </ul>
               )}
               <p className="text-xs">Updated: {truthSnapshot.updatedAt || "Unknown"}</p>
+
+              {!!truthSignals.length && (
+                <div className="pt-2 space-y-2">
+                  <p className="font-medium text-foreground">Latest signals</p>
+                  {truthSignals.map((s) => (
+                    <div key={s.id} className="rounded border p-2 text-xs">
+                      <p className="text-foreground">{s.headline}</p>
+                      <p className="text-muted-foreground">
+                        {s.source} · {s.sentiment || "neutral"} · impact {s.impact ?? "n/a"} · conf {s.confidence ?? "n/a"}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </>
           ) : (
             <p>
@@ -131,7 +167,7 @@ export default function SystemsPage() {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
             <div>
               <p className="text-muted-foreground">Positions</p>
-              <p className="text-foreground font-semibold">{positions.length}</p>
+              <p className="text-foreground font-semibold">{stats.count}</p>
             </div>
             <div>
               <p className="text-muted-foreground">Green / Red</p>
@@ -173,7 +209,8 @@ export default function SystemsPage() {
       </Card>
 
       <p className="text-xs text-muted-foreground">
-        Want this to auto-refresh from your local truth-monitor process? I can wire a lightweight exporter + cron push next.
+        This page is Supabase-ready via <code>NEXT_PUBLIC_SUPABASE_URL</code> + <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>,
+        with static snapshot fallback for local/dev.
       </p>
 
       <Link href="/" className="text-sm underline">← Back home</Link>

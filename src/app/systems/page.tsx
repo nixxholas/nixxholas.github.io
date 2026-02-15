@@ -48,7 +48,18 @@ const supabaseHeaders =
 
 const hasSupabase = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
 
-function mapDbPosition(row: any): PolymarketPosition {
+type DbPolymarketRow = {
+  market_slug?: string;
+  market_title?: string;
+  outcome?: string;
+  size?: number | string;
+  initial_value?: number | string;
+  current_value?: number | string;
+  cash_pnl?: number | string;
+  mark_price?: number | string;
+};
+
+function mapDbPosition(row: DbPolymarketRow): PolymarketPosition {
   return {
     title: row.market_title ?? "Unknown market",
     slug: row.market_slug ?? "unknown",

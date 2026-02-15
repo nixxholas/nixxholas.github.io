@@ -48,6 +48,29 @@ Without these variables, `/systems` falls back to static snapshot file:
 4. Add polymarket snapshot writer (hourly)
 5. Verify `/systems` shows live feed + deltas
 
+## Writer commands
+
+### Truth Monitor writer
+```bash
+cd ~/.openclaw/workspace/truth-monitor
+SUPABASE_URL="https://<project>.supabase.co" \
+SUPABASE_SERVICE_ROLE_KEY="<service-role-key>" \
+python3 supabase_writer.py
+```
+
+### Polymarket writer
+```bash
+cd ~/.openclaw/workspace/polymarket-analyst
+SUPABASE_URL="https://<project>.supabase.co" \
+SUPABASE_SERVICE_ROLE_KEY="<service-role-key>" \
+POLYMARKET_WALLET="0xcF0f71A0e571905D4A6a8915EE26286a5e783cfb" \
+python3 supabase_positions_writer.py
+```
+
+### Suggested cron cadence
+- `truth-monitor/supabase_writer.py`: every 5 minutes
+- `polymarket-analyst/supabase_positions_writer.py`: every 30-60 minutes
+
 ## Security notes
 - Use anon key only for read paths
 - Use service role key only in writer jobs (never in browser)

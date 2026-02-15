@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { Briefcase, HomeIcon, NotebookIcon } from "lucide-react";
+import { ActivityIcon, Briefcase, HomeIcon, NotebookIcon } from "lucide-react";
 
 export const DATA = {
   name: "Nicholas Chen",
@@ -38,6 +38,7 @@ export const DATA = {
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
     { href: "/investments", icon: Briefcase, label: "Angel" },
+    { href: "/systems", icon: ActivityIcon, label: "Live Systems" },
   ],
   contact: {
     email: "m@nixholas.me",

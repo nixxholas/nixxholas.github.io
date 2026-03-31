@@ -142,3 +142,205 @@ code[data-line-numbers-max-digits="2"] > [data-line]::before {
 code[data-line-numbers-max-digits="3"] > [data-line]::before {
   width: 3rem;
 }
+
+.constellation-page {
+  --constellation-text: 213 100% 96%;
+  --constellation-muted: 210 30% 70%;
+  --constellation-border: rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 28%),
+    radial-gradient(circle at right 20%, rgba(16, 185, 129, 0.14), transparent 25%),
+    linear-gradient(180deg, #07111f 0%, #081320 45%, #040914 100%);
+  color: hsl(var(--constellation-text));
+}
+
+.constellation-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.constellation-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(16, 185, 129, 0.08), transparent 28%),
+    linear-gradient(300deg, rgba(34, 211, 238, 0.12), transparent 34%);
+  pointer-events: none;
+}
+
+.constellation-display {
+  max-width: 12ch;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.constellation-display span {
+  display: block;
+  color: #8ce7ff;
+}
+
+.constellation-kicker,
+.constellation-small-label,
+.constellation-index {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #8bcff8;
+}
+
+.constellation-body-xl {
+  max-width: 62ch;
+  font-size: 1.075rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.constellation-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.8rem 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.constellation-toggle input {
+  accent-color: #34d399;
+}
+
+.constellation-glass {
+  backdrop-filter: blur(18px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 30px 80px rgba(0, 0, 0, 0.24);
+}
+
+.constellation-step-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.9rem;
+  background: rgba(52, 211, 153, 0.14);
+  color: #7bf0c1;
+}
+
+.constellation-matrix {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+}
+
+.constellation-matrix th {
+  padding: 0 0.5rem 0.65rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.constellation-matrix td {
+  padding: 0.35rem 0.5rem;
+  background: rgba(255, 255, 255, 0.035);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.constellation-matrix tr td:first-child {
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem 0 0 1rem;
+}
+
+.constellation-matrix tr td:last-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0 1rem 1rem 0;
+}
+
+.constellation-matrix tr.selected td {
+  background: rgba(34, 211, 238, 0.09);
+  border-color: rgba(34, 211, 238, 0.16);
+}
+
+.constellation-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 700;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease;
+}
+
+.constellation-cell:hover {
+  transform: translateY(-1px);
+}
+
+.constellation-cell.on {
+  background: rgba(52, 211, 153, 0.16);
+  color: #dcfff1;
+  border-color: rgba(52, 211, 153, 0.24);
+}
+
+.constellation-chip,
+.constellation-summary-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.constellation-chip {
+  padding: 0.45rem 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.constellation-chip-good,
+.constellation-summary-chip-good {
+  background: rgba(52, 211, 153, 0.16);
+  color: #dcfff1;
+}
+
+.constellation-chip-warn {
+  background: rgba(251, 191, 36, 0.16);
+  color: #ffebb3;
+}
+
+.constellation-chip-danger,
+.constellation-summary-chip-danger {
+  background: rgba(251, 113, 133, 0.16);
+  color: #ffd6de;
+}
+
+.constellation-chip-muted {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.constellation-summary-chip {
+  padding: 0.7rem 0.9rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.86);
+}
+
+@media (max-width: 767px) {
+  .constellation-display {
+    max-width: none;
+  }
+}

@@ -4,7 +4,7 @@ import { Briefcase, HomeIcon, NotebookIcon } from "lucide-react";
 export const DATA = {
   name: "Nicholas Chen",
   initials: "CHW",
-  url: "https://nicholas.me",
+  url: "https://nixholas.me",
   location: "Singapore City, SG",
   locationLink: "https://www.google.com/maps/place/singapore",
   description:

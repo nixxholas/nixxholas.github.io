@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useInView, Variants } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion, useInView, type Variants } from "framer-motion";
+import type { UseInViewOptions } from "framer-motion";
+import { useRef } from "react";
 
 interface BlurFadeProps {
   children: React.ReactNode;
@@ -14,7 +15,7 @@ interface BlurFadeProps {
   delay?: number;
   yOffset?: number;
   inView?: boolean;
-  inViewMargin?: any;
+  inViewMargin?: UseInViewOptions["margin"];
   blur?: string;
 }
 const BlurFade = ({
@@ -29,16 +30,8 @@ const BlurFade = ({
   blur = "6px",
 }: BlurFadeProps) => {
   const ref = useRef(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const inViewResult = useInView(ref, { once: true, margin: inViewMargin });
-  const isInView = !inView || inViewResult;
-
-  // Track if we've animated to prevent re-animation issues
-  useEffect(() => {
-    if (isInView && !hasAnimated) {
-      setHasAnimated(true);
-    }
-  }, [isInView, hasAnimated]);
+  const isInView = useInView(ref, { once: true, margin: inViewMargin });
+  const shouldAnimate = !inView || isInView;
 
   const defaultVariants: Variants = {
     hidden: { y: yOffset, opacity: 0, filter: `blur(${blur})` },
@@ -49,8 +42,8 @@ const BlurFade = ({
   return (
     <motion.div
       ref={ref}
-      initial="visible"
-      animate="visible"
+      initial="hidden"
+      animate={shouldAnimate ? "visible" : "hidden"}
       variants={combinedVariants}
       transition={{
         delay: 0.04 + delay,

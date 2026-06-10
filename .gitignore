@@ -49,6 +49,9 @@ Thumbs.db
 .jekyll-metadata
 vendor/
 
+# Claude Code
+CLAUDE.md
+
 # Misc
 *.log
 *.bak

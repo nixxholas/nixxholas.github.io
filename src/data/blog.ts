@@ -1,14 +1,34 @@
-// src/data/blog.ts
 import { client } from "@/lib/sanity/client";
 import { groq } from "next-sanity";
 import type { SanityPost } from "@/types/sanity";
 
-// Lightweight query for blog list - only fetch what we display
+export function formatPostDate(date: string): string {
+  const parsedDate = new Date(date);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return "Undated";
+  }
+
+  return new Intl.DateTimeFormat("en", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(parsedDate);
+}
+
 export async function getAllPosts(): Promise<
-  Pick<SanityPost, "_id" | "title" | "slug" | "publishedAt" | "mainImage" | "excerpt">[]
+  Pick<
+    SanityPost,
+    "_id" | "title" | "slug" | "publishedAt" | "mainImage" | "excerpt"
+  >[]
 > {
   return client.fetch(
-    groq`*[_type == "post"] | order(publishedAt desc) {
+    groq`*[
+      _type == "post" &&
+      defined(slug.current) &&
+      defined(publishedAt)
+    ] | order(publishedAt desc) {
       _id,
       title,
       slug,
@@ -18,27 +38,30 @@ export async function getAllPosts(): Promise<
     }`,
     {},
     {
-      // Enable caching for better performance
       cache: "force-cache",
       next: { tags: ["posts"] },
     }
   );
 }
 
-// Full query for individual post page
 export async function getPost(slug: string): Promise<SanityPost | null> {
   return client.fetch(
-    groq`*[_type == "post" && slug.current == $slug][0] {
+    groq`*[
+      _type == "post" &&
+      slug.current == $slug &&
+      defined(publishedAt)
+    ][0] {
       _id,
+      _type,
       title,
       slug,
+      excerpt,
       publishedAt,
       "mainImage": mainImage.asset->url,
       body,
     }`,
     { slug },
     {
-      // Enable caching for better performance
       cache: "force-cache",
       next: { tags: [`post:${slug}`] },
     }

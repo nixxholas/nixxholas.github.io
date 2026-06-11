@@ -13,14 +13,14 @@ export const DATA = {
     },
     {
       name: "Asgard",
-      logoUrl: "/asgard.svg",
+      logoUrl: "/asgard-logo-lite.jpg",
       description: "Seed Investor",
       status: "active",
       badges: ["DeFi", "Yield", "Aggregator"],
       shortIntro:
         "Asgard is the most comprehensive yields engine on Solana.",
       blogPostSlug: undefined,
-      href: "https://www.asgardfi.com",
+      href: "https://app.asgard.finance/",
     },
     {
       name: "Ranger Finance",

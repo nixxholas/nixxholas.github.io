@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Card,
   CardHeader,
@@ -10,20 +8,15 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import React from "react";
-import { getPost } from "@/data/blog";
-import type { SanityPost } from "@/types/sanity";
-import { PortableText } from "@portabletext/react";
-import { portableTextComponents } from "@/components/portable-text";
-import { ChevronRightIcon, Loader2Icon } from "lucide-react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface InvestmentCardProps {
   name: string;
   logoUrl: string;
   description: string;
+  status?: string;
   badges: readonly string[];
   shortIntro: string;
   blogPostSlug?: string;
@@ -34,52 +27,50 @@ export function InvestmentCard({
   name,
   logoUrl,
   description,
+  status,
   badges,
   shortIntro,
   blogPostSlug,
   href,
 }: InvestmentCardProps) {
-  const [isExpanded, setIsExpanded] = React.useState(false);
-  const [post, setPost] = React.useState<SanityPost | null>(null);
-  const [isLoading, setIsLoading] = React.useState(false);
-
-  const handleClick = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    if (blogPostSlug) {
-      e.preventDefault();
-      if (isExpanded) {
-        setIsExpanded(false);
-        return;
-      }
-
-      setIsExpanded(true);
-      if (!post) {
-        setIsLoading(true);
-        const fetchedPost = await getPost(blogPostSlug);
-        setPost(fetchedPost);
-        setIsLoading(false);
-      }
-    }
-  };
+  const isWrittenOff = status === "written_off";
 
   return (
-    <Card className="flex flex-col overflow-hidden border transition-all duration-300 ease-out h-full hover:shadow-xl hover:-translate-y-1">
+    <Card
+      className={cn(
+        "flex h-full flex-col overflow-hidden border transition-all duration-300 ease-out",
+        "hover:-translate-y-1 hover:shadow-xl",
+        isWrittenOff && "border-dashed opacity-80"
+      )}
+    >
       <Link
         href={href || "#"}
         target="_blank"
-        className="block cursor-pointer group"
+        rel="noreferrer"
+        className="group block cursor-pointer"
       >
         <CardHeader className="flex flex-row items-center gap-4 p-4">
-          <Image
-            src={logoUrl}
-            alt={name}
-            width={40}
-            height={40}
-            className="rounded-sm"
-          />
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-sm border bg-background p-1">
+            <Image
+              src={logoUrl}
+              alt={name}
+              width={40}
+              height={40}
+              className="max-h-full max-w-full rounded-sm object-contain"
+            />
+          </div>
           <div className="flex-1">
-            <CardTitle className="text-base flex items-center">{name}</CardTitle>
+            <div className="flex flex-wrap items-center gap-2">
+              <CardTitle className="text-base">{name}</CardTitle>
+              {isWrittenOff && (
+                <Badge
+                  variant="outline"
+                  className="border-amber-300 bg-amber-50 px-2 py-0 text-[10px] text-amber-800 dark:border-amber-900/70 dark:bg-amber-950/40 dark:text-amber-300"
+                >
+                  Written off
+                </Badge>
+              )}
+            </div>
             <CardDescription>{description}</CardDescription>
           </div>
         </CardHeader>
@@ -100,47 +91,15 @@ export function InvestmentCard({
           ))}
         </div>
         {blogPostSlug && (
-          <button
-            onClick={handleClick}
+          <Link
+            href={`/blog/${blogPostSlug}`}
             className="flex items-center text-xs font-semibold text-muted-foreground hover:text-foreground"
           >
             Read Thesis
-            <ChevronRightIcon
-              className={cn(
-                "size-4 translate-x-0 transform transition-all duration-300 ease-out",
-                isExpanded ? "rotate-90" : "rotate-0"
-              )}
-            />
-          </button>
+            <ChevronRightIcon className="size-4 ml-0.5" />
+          </Link>
         )}
       </CardFooter>
-      <motion.div
-        initial={{ opacity: 0, height: 0 }}
-        animate={{
-          opacity: isExpanded ? 1 : 0,
-          height: isExpanded ? "auto" : 0,
-        }}
-        transition={{
-          duration: 0.7,
-          ease: [0.16, 1, 0.3, 1],
-        }}
-      >
-        <CardContent className="p-4 pt-0">
-          {isLoading && (
-            <div className="flex items-center justify-center">
-              <Loader2Icon className="animate-spin" />
-            </div>
-          )}
-          {post && (
-            <article className="prose dark:prose-invert max-w-none">
-              <PortableText
-                value={post.body}
-                components={portableTextComponents}
-              />
-            </article>
-          )}
-        </CardContent>
-      </motion.div>
     </Card>
   );
 }

@@ -1,10 +1,15 @@
-import { getAllPosts, getPost } from "@/data/blog";
+import {
+  formatPostDate,
+  getAllPosts,
+  getPost,
+} from "@/data/blog";
 import { DATA } from "@/data/resume";
+import { portableTextComponents } from "@/components/portable-text";
+import { ArrowLeftIcon } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
-import { portableTextComponents } from "@/components/portable-text";
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -14,39 +19,33 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata | undefined> {
   const { slug } = await params;
-  let post = await getPost(slug);
+  const post = await getPost(slug);
 
   if (!post) {
     return;
   }
 
-  let { title, publishedAt: publishedTime, mainImage } = post;
-  let ogImage = mainImage ? mainImage : `${DATA.url}/og?title=${title}`;
+  const { title, publishedAt: publishedTime, mainImage } = post;
+  const ogImage = mainImage ?? `${DATA.url}${DATA.avatarUrl}`;
 
   return {
     title,
-    description: "A blog post by " + DATA.name,
+    description: post.excerpt ?? `A blog post by ${DATA.name}`,
     openGraph: {
       title,
-      description: "A blog post by " + DATA.name,
+      description: post.excerpt ?? `A blog post by ${DATA.name}`,
       type: "article",
       publishedTime,
       url: `${DATA.url}/blog/${post.slug.current}`,
-      images: [
-        {
-          url: ogImage,
-        },
-      ],
+      images: [{ url: ogImage }],
     },
     twitter: {
       card: "summary_large_image",
       title,
-      description: "A blog post by " + DATA.name,
+      description: post.excerpt ?? `A blog post by ${DATA.name}`,
       images: [ogImage],
     },
   };
@@ -55,12 +54,10 @@ export async function generateMetadata({
 export default async function Blog({
   params,
 }: {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  let post = await getPost(slug);
+  const post = await getPost(slug);
 
   if (!post) {
     notFound();
@@ -70,33 +67,27 @@ export default async function Blog({
     <section id="blog">
       <Link
         href="/blog"
-        className="text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50 transition-all mb-8 flex items-center"
+        className="mb-8 flex items-center text-sm text-muted-foreground transition-all hover:text-foreground"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="mr-1"
-        >
-          <path d="m15 18-6-6 6-6" />
-        </svg>
+        <ArrowLeftIcon className="mr-1 size-4" />
         Back to blog
       </Link>
-      <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
-        {post.title}
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {new Date(post.publishedAt).toDateString()}
+      <header className="mb-10 max-w-[650px] space-y-3">
+        <p className="text-sm text-muted-foreground">
+          <time dateTime={post.publishedAt}>
+            {formatPostDate(post.publishedAt)}
+          </time>
         </p>
-      </div>
-      <article className="prose dark:prose-invert max-w-[650px]">
+        <h1 className="title text-4xl font-bold tracking-tighter sm:text-5xl">
+          {post.title}
+        </h1>
+        {post.excerpt && (
+          <p className="text-lg leading-8 text-muted-foreground">
+            {post.excerpt}
+          </p>
+        )}
+      </header>
+      <article className="prose max-w-[650px] dark:prose-invert prose-headings:tracking-tight prose-a:text-foreground prose-a:underline-offset-4">
         <PortableText value={post.body} components={portableTextComponents} />
       </article>
     </section>

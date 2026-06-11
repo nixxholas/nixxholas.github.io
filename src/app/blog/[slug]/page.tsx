@@ -1,6 +1,5 @@
 import {
   formatPostDate,
-  getAllPosts,
   getPost,
 } from "@/data/blog";
 import { DATA } from "@/data/resume";
@@ -11,10 +10,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 
-export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  return posts.map((post) => ({ slug: post.slug.current }));
-}
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
 
 export async function generateMetadata({
   params,

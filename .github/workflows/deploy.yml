@@ -1,14 +1,13 @@
-name: Deploy to GitHub Pages
+name: Build
 
 on:
+  pull_request:
   push:
-    branches: [ master ]  # Set this to your default branch
+    branches: [ master ]
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read
 
 jobs:
   build:
@@ -34,10 +33,3 @@ jobs:
         
       - name: Build with Next.js
         run: pnpm build
-        
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
-          publish_branch: gh-pages

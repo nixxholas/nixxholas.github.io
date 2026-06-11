@@ -8,8 +8,7 @@ Your portfolio site now has a fully functional, optimized blog powered by Sanity
 ### Data Fetching
 - **Blog List**: Only fetches `title`, `slug`, `excerpt`, `publishedAt`, and `mainImage` (no body content)
 - **Individual Posts**: Fetches full content only when needed
-- **Caching**: Enabled force-cache with tags for optimal performance
-- **Result**: Build time reduced from 4.7s to 726ms (6x faster)
+- **Freshness**: Blog routes fetch Sanity at request time with `no-store`, so published Sanity edits do not require a rebuild
 
 ### Query Optimization
 ```typescript
@@ -91,10 +90,8 @@ SANITY_API_TOKEN="your-token-here"
 # Development
 pnpm dev
 
-# Production build (for GitHub Pages)
+# Production build
 pnpm build
-
-# Output will be in ./out directory (ready for GitHub Pages)
 ```
 
 ## Schema Fields
@@ -118,11 +115,12 @@ pnpm build
 
 ## Cache Management
 
-The blog uses Next.js caching with tags:
-- `posts`: All blog posts list
-- `post:${slug}`: Individual post cache
+The public blog intentionally bypasses Next.js fetch caching for Sanity content:
+- `/blog` uses dynamic rendering and fetches the latest published post list
+- `/blog/[slug]` uses dynamic rendering and fetches the latest published body
 
-To revalidate cache after updates, rebuild your site or implement ISR (when not using static export).
+Publishing in Sanity should be reflected on the public Vercel site without a
+code rebuild.
 
 ## Troubleshooting
 

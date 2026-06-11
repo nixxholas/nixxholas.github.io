@@ -38,8 +38,7 @@ export async function getAllPosts(): Promise<
     }`,
     {},
     {
-      cache: "force-cache",
-      next: { tags: ["posts"] },
+      cache: "no-store",
     }
   );
 }
@@ -62,8 +61,7 @@ export async function getPost(slug: string): Promise<SanityPost | null> {
     }`,
     { slug },
     {
-      cache: "force-cache",
-      next: { tags: [`post:${slug}`] },
+      cache: "no-store",
     }
   );
 }

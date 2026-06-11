@@ -46,7 +46,7 @@ export type GitHubRepo = {
 const REPO_NOTES: Record<string, RepoNote> = {
   "nixxholas.github.io": {
     summary:
-      "This portfolio itself: a static Next.js and Sanity surface for writing, investing notes, and project history.",
+      "This portfolio itself: a Next.js and Sanity surface for writing, investing notes, and project history.",
     tags: ["portfolio", "next.js", "sanity"],
   },
   "delta-neutral-engine": {

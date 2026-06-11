@@ -10,6 +10,10 @@ export const metadata = {
     "Notes on software, startups, blockchains, investing, and the edges between them.",
 };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
 const BLUR_FADE_DELAY = 0.04;
 
 export default async function BlogPage() {

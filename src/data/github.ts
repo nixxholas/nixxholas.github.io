@@ -21,7 +21,6 @@ type GitHubApiRepo = {
 type RepoNote = {
   summary: string;
   tags: string[];
-  featured?: boolean;
 };
 
 export type GitHubRepo = {
@@ -49,37 +48,41 @@ const REPO_NOTES: Record<string, RepoNote> = {
     summary:
       "This portfolio itself: a static Next.js and Sanity surface for writing, investing notes, and project history.",
     tags: ["portfolio", "next.js", "sanity"],
-    featured: true,
   },
   "delta-neutral-engine": {
     summary:
       "A Python research engine for modeling delta-neutral crypto strategies, trade construction, and risk surfaces.",
     tags: ["markets", "research", "python"],
-    featured: true,
   },
   "kernel-comet-6.1": {
     summary:
       "Linux kernel workspace for lower-level device, driver, and systems experimentation.",
     tags: ["linux", "kernel", "systems"],
-    featured: true,
   },
   sniffer: {
     summary:
       "TypeScript data inspection tooling from the blockchain and infrastructure side of the workbench.",
     tags: ["typescript", "tooling", "infra"],
-    featured: true,
   },
   nozomi: {
     summary:
       "The original Nozomi product codebase, capturing the API testing and monitoring product work before the public portfolio writeup.",
     tags: ["product", "api", "csharp"],
-    featured: true,
   },
   "project-gooey": {
     summary:
       "A Java application experiment from the older product and interface-building archive.",
     tags: ["java", "ui", "archive"],
-    featured: true,
+  },
+  bigtable_rs: {
+    summary:
+      "Rust data-infrastructure workbench for the Google Bigtable Data API, useful around high-volume indexing and analytics systems.",
+    tags: ["rust", "bigtable", "data infra"],
+  },
+  "solana-rpc-ansible": {
+    summary:
+      "Operational infrastructure scripts for Solana RPC nodes, kept as a practical reference for validator and data-plane automation.",
+    tags: ["solana", "ansible", "ops"],
   },
   CounterKeygen: {
     summary:
@@ -107,6 +110,15 @@ const REPO_NOTES: Record<string, RepoNote> = {
     tags: ["dotnet", "cms", "game tooling"],
   },
 };
+
+const FEATURED_REPOSITORY_NAMES = [
+  "delta-neutral-engine",
+  "kernel-comet-6.1",
+  "sniffer",
+  "nozomi",
+  "bigtable_rs",
+  "solana-rpc-ansible",
+];
 
 const FALLBACK_REPOS: GitHubApiRepo[] = [
   {
@@ -267,8 +279,6 @@ function repoTags(repo: GitHubApiRepo): string[] {
 }
 
 function normalizeRepo(repo: GitHubApiRepo): GitHubRepo {
-  const note = REPO_NOTES[repo.name];
-
   return {
     name: repo.name,
     fullName: repo.full_name,
@@ -286,7 +296,7 @@ function normalizeRepo(repo: GitHubApiRepo): GitHubRepo {
     license: repo.license?.spdx_id ?? null,
     explanation: repoExplanation(repo),
     tags: repoTags(repo),
-    isFeatured: Boolean(note?.featured),
+    isFeatured: FEATURED_REPOSITORY_NAMES.includes(repo.name),
   };
 }
 
@@ -326,10 +336,15 @@ export async function getPublicRepositories(): Promise<GitHubRepo[]> {
 }
 
 export function getFeaturedRepositories(repos: GitHubRepo[]): GitHubRepo[] {
-  const explicitFeatured = repos.filter((repo) => repo.isFeatured);
+  const reposByName = new Map(repos.map((repo) => [repo.name, repo]));
+  const explicitFeatured = FEATURED_REPOSITORY_NAMES
+    .map((name) => reposByName.get(name))
+    .filter((repo): repo is GitHubRepo => Boolean(repo));
+  const featuredNames = new Set(explicitFeatured.map((repo) => repo.name));
   const fill = repos.filter(
     (repo) =>
-      !repo.isFeatured &&
+      !featuredNames.has(repo.name) &&
+      repo.name !== "nixxholas.github.io" &&
       !repo.isFork &&
       (repo.description || repo.language || repo.stars > 0)
   );

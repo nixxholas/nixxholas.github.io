@@ -42,6 +42,12 @@ Built with next.js, [shadcn/ui](https://ui.shadcn.com/), and [magic ui](https://
 
 5. Open the [Config file](./src/data/resume.tsx) and make changes
 
+# Tommy legal pages
+
+Tommy’s standalone [Terms of Service](./public/assistant/terms-of-service.html) and
+[Privacy Policy](./public/assistant/privacy-policy.html) live in `public/assistant/`.
+See [Tommy legal pages](./TOMMY_LEGAL.md) for URLs, preview instructions, and maintenance notes.
+
 # License
 
 Licensed under the [MIT license](https://github.com/nicholaschen/portfolio/blob/main/LICENSE.md).
